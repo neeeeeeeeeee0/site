@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Landing Page</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  
+  <link rel="preload" href="fonts/Roboto-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="fonts/Roboto-Regular.woff" as="font" type="font/woff" crossorigin="anonymous">
+  <link rel="preload" href="fonts/Roboto-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="fonts/Roboto-Bold.woff" as="font" type="font/woff" crossorigin="anonymous">
+
+  <style>
+  :root {
+    --primary-color: #007bff;
+    --secondary-color: #7c8590;
+    --font-family: 'Roboto', sans-serif;
+    --font-size-base: 1rem;
+    --border-radius: 0.3125rem; 
+    --spacing-unit: 1rem; 
+  }
+  
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: var(--font-family);
+    font-size: var(--font-size-base);
+    background-image: url("img/back.jpg"); 
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    line-height: 1.5;
+    color: #333;
+    width: 100%;
+    min-width: 320px; 
+    overflow-x: hidden;  
+  }
+  
+  a {
+    color: var(--primary-color);
+    text-decoration: none;
+  }
+  
+  .button {
+    display: inline-block;
+    padding: calc(var(--spacing-unit) * 0.625) var(--spacing-unit);  
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    font-family: var(--font-family);
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .button:hover {
+    opacity: 0.8;
+  }
+  
+  .button:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+  }
+  
+  .button--primary {
+    background-color: var(--primary-color);
+    color: white;
+  }
+  
+  .button--secondary {
+    background-color: var(--secondary-color);
+    color: white;
+  }
+  
+  .input {
+    display: block; 
+    width: 100%;
+    padding: calc(var(--spacing-unit) * 0.625); 
+    border: 1px solid #ccc;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-family: var(--font-family);
+    transition: border-color 0.2s ease-in-out;
+  }
+  
+  .input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+  }
+  
+  .input--error {
+    border-color: red;
+  }
+  
+  .header { 
+    background-color: #110876;
+    padding: var(--spacing-unit);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .header__logo img {
+    width: 50px; 
+    height: 50px;
+    border-radius: 50%; 
+  }
+  
+  .header__nav {
+    flex-grow: 1; 
+    margin-left: var(--spacing-unit);
+  }
+  
+  .header__list {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    justify-content: flex-end; 
+  }
+  
+  .header__item {
+    margin-left: var(--spacing-unit);
+  }
+  
+  .header__link {
+    display: block; 
+    padding: calc(var(--spacing-unit) * 0.25) calc(var(--spacing-unit) * 0.5); 
+    border-radius: var(--border-radius);
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+  }
+  
+  .header__link:hover {
+    background-color: var(--primary-color);
+    color: rgb(255, 255, 255);
+  } 
+  
+  .main {
+    padding: calc(var(--spacing-unit) * 2);
+  }
+  
+  .hero {
+    text-align: center;
+  }
+  
+  .hero__content {
+    margin-bottom: calc(var(--spacing-unit) * 2);
+  }
+  
+  .hero__title {
+    font-size: 2.5rem;
+    color: #f0f0f0;
+    margin-bottom: var(--spacing-unit);
+  }
+  
+  .hero__description {
+    color: #f0f0f0;
+    font-size: 1.0rem;
+    margin-bottom: var(--spacing-unit);
+  }
+  
+  .iphone-block {
+    width: 100%;
+    max-width: 15rem; 
+    margin: 1.25rem auto; 
+  }
+  
+  .iphone-block img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .how-buds-work {
+    width: 100%;
+    color: #f0f0f0;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .how-buds-work__track {
+    display: flex;
+    animation: scrollText 15s linear infinite alternate; 
+    width: fit-content;
+    white-space: nowrap;
+  }
+  
+  .how-buds-work__track span {
+    margin-right: calc(var(--spacing-unit) * 3.125); 
+    font-size: 1.25rem; 
+  }
+  
+  @keyframes scrollText {
+    0% {
+      transform: translateX(0);
+    }
+  
+    100% {
+      transform: translateX(-100%);  
+    }
+  }
+  
+  .footer { 
+    background-color: #110876;
+    color: white;
+    text-align: left;
+    padding: var(--spacing-unit);
+  }
+  
+  .footer__copyright {
+    font-size: 0.9rem; 
+  }
+  
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.502);
+    z-index: 1000;
+    overflow: auto;
+  }
+  
+  .modal__content {
+    position: relative;
+    margin: 15% auto; 
+    padding: var(--spacing-unit);
+    border-radius: var(--border-radius);
+    background-color: white;
+    width: 90%;  
+    max-width: 31.25rem; 
+  }
+  
+  .modal__close {
+    position: absolute;
+    top: 0.625rem; 
+    right: 0.625rem; 
+    font-size: 1.25rem; 
+    cursor: pointer;
+  }
+  
+  .form__group {
+    margin-bottom: var(--spacing-unit);
+    position: relative; 
+  }
+  
+  .form__label {
+    display: block;
+    margin-bottom: calc(var(--spacing-unit) * 0.25); 
+    font-weight: bold;
+  }
+  
+  .form__phone-wrapper {
+    position: relative;
+  }
+  
+  .form__phone-flag {
+    position: absolute;
+    left: 0.625rem;  
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    color: #505050;
+    pointer-events: none;
+  }
+  
+  .form input[type="tel"] {
+    padding-left: calc(var(--spacing-unit) * 2.5); 
+  }
+  
+  
+  .cookie-notice {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #eee;
+    padding: var(--spacing-unit);
+    text-align: center;
+    z-index: 999;
+  }
+
+  </style>
+
+</head>
+
+
+<body>
+
+ <header class="header">
+    <div class="header__logo">
+      <img src="img/logo.jpg">
+    </div>
+    <nav class="header__nav">
+      <ul class="header__list">
+        <li class="headeritem"> <a href="#" class="headerlink">Услуги</a> </li>
+        <li class="headeritem"> <a href="#" class="headerlink">О нас</a> </li>
+        <li class="headeritem"> <a href="#" class="headerlink">Контакты</a> </li>
+      </ul>
+    </nav>
+    <div class="header__cta">
+      <button class="button--primary js-open-modal" data-modal="order-modal">Заказать</button>
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="hero">
+      <div class="hero__content">
+        <h1 class="hero__title">РАЗРАБОТКА ИГР ЛЮБОЙ СЛОЖНОСТИ</h1>
+        <p class="hero__description">Мы разрабатываем игры, которые раздвигают границы возможного и устанавливают новые стандарты в индустрии</p>
+        <button class="button button--secondary">связаться с нами</button>
+      </div>
+
+      
+      <div class="iphone-block">
+        <picture>
+          <source srcset="img/iph.jpg" type="image/webp">
+          <img src="" alt="iPhone">
+        </picture>
+        <div class="how-buds-work">
+          <div class="how-buds-work__track">
+            <span>How Buds Works</span>
+            <span>How Buds Works</span>
+            <span>How Buds Works</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p class="footer__copyright">&copy;2025 PlayGo</p>
+  </footer>
+
+
+
+  <div class="modal" id="order-modal">
+    <div class="modal__content">
+      <span class="modal__close js-close-modal">&times;</span>
+      <h2 class="modal__title">Оформить заказ</h2>
+      <form class="form" id="order-form">
+        <div class="form__group">
+          <label for="name" class="form__label">Имя</label>
+          <input type="text" id="name" name="name" class="input" required>
+        </div>
+        <div class="form__group">
+          <label for="phone" class="form__label">Телефон</label>
+          <div class="form__phone-wrapper">
+            <span class="form__phone-flag">+7</span>
+            <input type="tel" id="phone" name="phone" class="input" required>
+          </div>
+        </div>
+        <button type="submit" class="button button--primary">Отправить</button>
+      </form>
+    </div>
+  </div>
+
+  
+  <div class="cookie-notice">
+    <p class="cookie-notice__text">Мы используем cookie-файлы для улучшения работы сайта. Продолжая использовать сайт, вы соглашаетесь с политикой
+      конфиденциальности</p>
+    <button class="button button--primary js-close-cookie">Принять</button>
+  </div>
+
+  <script src="js/script.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  
+  const openModalButtons = document.querySelectorAll('.js-open-modal');
+  const closeModalButtons = document.querySelectorAll('.js-close-modal');
+  const modals = document.querySelectorAll('.modal');
+
+  openModalButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const modalId = button.dataset.modal;
+      const modal = document.getElementById(modalId);
+      modal.style.display = 'block';
+    });
+  });
+
+  closeModalButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const modal = button.closest('.modal');
+      modal.style.display = 'none';
+    });
+  });
+
+  window.addEventListener('click', (event) => {
+    modals.forEach(modal => {
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+  });
+
+
+  const form = document.getElementById('order-form');
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault(); 
+
+    let isValid = true;
+    const requiredFields = form.querySelectorAll('[required]');
+
+    requiredFields.forEach(field => {
+      if (field.value.trim() === '') {
+        isValid = false;
+        field.classList.add('input--error'); // Add a class to highlight the error
+      } else {
+        field.classList.remove('input--error');
+      }
+    });
+
+    
+    const phoneInput = document.getElementById('phone'); 
+    if (phoneInput) {
+      const phoneValue = phoneInput.value.trim();
+      if (!isValidPhoneNumber(phoneValue)) {
+        isValid = false;
+        phoneInput.classList.add('input--error');
+      } else {
+        phoneInput.classList.remove('input--error');
+      }
+    }
+
+    if (isValid) {
+      
+      alert('Форма успешно отправлена!');
+      form.reset(); 
+      const modal = document.getElementById('order-modal');
+      if (modal) {
+        modal.style.display = 'none';
+      }
+    } else {
+      alert('Пожалуйста, заполните все обязательные поля и введите корректный номер телефона');
+    }
+   }); 
+
+
+  
+  const cookieNotice = document.querySelector('.cookie-notice');
+  const closeCookieButton = document.querySelector('.js-close-cookie');
+
+  if (cookieNotice && closeCookieButton) {
+    closeCookieButton.addEventListener('click', () => {
+      cookieNotice.style.display = 'none';
+    });
+  }
+
+  const phoneInput = document.getElementById('phone');
+
+  function maskPhone(phoneValue) {
+    let value = phoneValue.replace(/\D+/g, '');
+    let result = '+7';
+
+    if (value.length > 1) {
+      result += ' (' + value.substring(1, 4);
+    } else {
+      return result;
+    }
+
+
+result += value.length > 4 ? ') ' + value.substring(4, 7) : '';
+    result += value.length > 7 ? '-' + value.substring(7, 9) : '';
+    result += value.length > 9 ? '-' + value.substring(9, 11) : '';
+
+    return result;
+  }
+
+  if (phoneInput) {
+    phoneInput.addEventListener('input', function (e) {
+      e.target.value = maskPhone(e.target.value); 
+    });
+  }
+
+  function isValidPhoneNumber(phoneValue) {
+    const regex = /^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/;
+    return regex.test(phoneValue);
+  }
+});
+</script>
+
+
+</body>
+</html>
